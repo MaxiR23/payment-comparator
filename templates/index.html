@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparador de Pagos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="wrap">
+        <header>
+            <h1>Comparador de pagos</h1>
+            <p>Áulica vs planilla de control mensual</p>
+        </header>
+
+        <section class="form-section">
+            <div class="section-label">
+                <span class="section-num">01</span>
+                <span class="section-title">Archivos de entrada</span>
+            </div>
+            <div class="file-grid">
+                <div class="drop" id="zone-a" data-key="a">
+                    <input type="file" id="inp-a" accept=".xlsx">
+                    <div class="drop-meta">
+                        <span class="drop-type">Áulica</span>
+                        <span class="drop-hint">.xlsx</span>
+                    </div>
+                    <div class="name" id="lbl-a">Archivo Áulica</div>
+                </div>
+                <div class="drop" id="zone-c" data-key="c">
+                    <input type="file" id="inp-c" accept=".xlsx">
+                    <div class="drop-meta">
+                        <span class="drop-type">Control</span>
+                        <span class="drop-hint">.xlsx</span>
+                    </div>
+                    <div class="name" id="lbl-c">Planilla Control</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-section">
+            <div class="section-label">
+                <span class="section-num">02</span>
+                <span class="section-title">Configuración</span>
+            </div>
+            <div class="cfg-row">
+                <div class="field">
+                    <label for="sel-month">Mes</label>
+                    <select id="sel-month">
+                        {% for m in
+                        ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE']
+                        %}
+                        <option {% if m==default_month %}selected{% endif %}>{{ m }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="inp-year">Año</label>
+                    <input type="number" id="inp-year" value="{{ default_year }}" min="2020" max="2035">
+                </div>
+                <div class="field">
+                    <label for="inp-tol">Tolerancia $</label>
+                    <input type="number" id="inp-tol" value="{{ default_tol }}" min="0" max="100" step="0.5">
+                </div>
+            </div>
+        </section>
+
+        <div class="actions">
+            <button class="btn-run" id="btn-run" disabled>Comparar archivos</button>
+            <button class="btn-clear" id="btn-clear" disabled>Limpiar todo</button>
+        </div>
+
+        <div class="status" id="status"></div>
+
+        <div class="results" id="results">
+            <section class="form-section">
+                <div class="section-label">
+                    <span class="section-num">03</span>
+                    <span class="section-title">Resultado</span>
+                </div>
+                <div class="ledger">
+                    <div class="ledger-row warn">
+                        <span class="ledger-label">Diferencias</span>
+                        <span class="ledger-val" id="v-dif">—</span>
+                    </div>
+                    <div class="ledger-row warn">
+                        <span class="ledger-label">Solo en Control</span>
+                        <span class="ledger-val" id="v-falt">—</span>
+                    </div>
+                    <div class="ledger-row ok">
+                        <span class="ledger-label">Total diferencia</span>
+                        <span class="ledger-val" id="v-total">—</span>
+                    </div>
+                </div>
+                <button class="btn-dl" id="btn-dl">Descargar informe Excel</button>
+            </section>
+        </div>
+    </div>
+
+    <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

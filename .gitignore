@@ -1,0 +1,18 @@
+# datos sensibles
+data/
+uploads/
+output/
+
+# entorno virtual
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# variables de entorno
+.env
+.env.*

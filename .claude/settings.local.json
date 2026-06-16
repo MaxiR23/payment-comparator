@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(run)",
+      "Bash(lsof *)",
+      "Bash(ps *)",
+      "Bash(python3 -c \"import playwright; print\\('ok'\\)\")",
+      "Bash(pkill -f \"flask run\")"
+    ]
+  }
+}
