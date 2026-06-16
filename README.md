@@ -42,7 +42,7 @@ pip install -r requirements.txt
 
 ```bash
 python app.py
-# → http://localhost:5000
+# → http://127.0.0.1:8080
 ```
 
 En producción con gunicorn:
